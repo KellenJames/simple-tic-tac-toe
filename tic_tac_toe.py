@@ -5,11 +5,15 @@ play_again = 'Y'
 while(play_again == 'Y'):
     game = Board()
     while(not game.endgame):
-        game.swap_players()
         game.print_current_board()
-        user_choice = int(input())
+        try:
+            user_choice = int(input())
+        except:
+            print("Please enter in a valid placement.")
+            continue
         if(not game.check_for_valid_move(user_choice)):
             continue
+        game.swap_players()
         game.open_spaces -= 1
         game.place_token(user_choice)
         game.check_for_endgame(user_choice)
